@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: auth-service
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak-admin:
+            provider: keycloak
+            client-id: ${app.keycloak.client-id}
+            client-secret: ${app.keycloak.client-secret}
+            authorization-grant-type: client_credentials
+        provider:
+          keycloak:
+            token-uri: ${app.keycloak.server-url}/realms/${app.keycloak.realm}/protocol/openid-connect/token
+
+server:
+  port: ${APP_PORT:8081}
+
+app:
+  keycloak:
+    server-url: ${KEYCLOAK_URL:http://localhost:8180}
+    realm: ${KEYCLOAK_REALM:shop}
+    client-id: ${KEYCLOAK_CLIENT_ID:auth-service}
+    client-secret: ${KEYCLOAK_CLIENT_SECRET}
+  security:
+    jwt:
+      issuer: ${JWT_ISSUER:http://localhost:8180/realms/shop}
+      jwk-set-uri: ${app.keycloak.server-url}/realms/${app.keycloak.realm}/protocol/openid-connect/certs

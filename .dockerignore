@@ -1,0 +1,10 @@
+target/
+.idea/
+.git/
+.mvn/
+*.iml
+.env
+.env.*
+docker-compose.yml
+Dockerfile
+keycloak/
